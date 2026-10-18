@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拾光小筑 - 个人博客</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown-light.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github.min.css">
+<style>
+:root {
+  --primary: #4f7cff;
+  --primary-light: #eef3ff;
+  --text: #2d3748;
+  --text-light: #718096;
+  --border: #e2e8f0;
+  --bg: #f7f8fa;
+  --card: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ===== 顶部导航 ===== */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 860px; margin: 0 auto; padding: 0 20px;
+  height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  padding: 6px 14px; border-radius: 8px;
+  color: var(--text-light); text-decoration: none; font-size: 15px;
+  transition: all .2s;
+}
+.nav-links a:hover { color: var(--primary); background: var(--primary-light); }
+.nav-links a.active { color: var(--primary); background: var(--primary-light); font-weight: 600; }
+
+/* ===== 主体 ===== */
+.container { max-width: 860px; margin: 0 auto; padding: 32px 20px 64px; }
+
+/* 头部横幅 */
+.hero { text-align: center; padding: 40px 0 32px; }
+.hero h1 { font-size: 34px; letter-spacing: 2px; }
+.hero p { color: var(--text-light); margin-top: 8px; }
+
+/* 文章卡片 */
+.post-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 28px; margin-bottom: 18px;
+  cursor: pointer; transition: all .25s;
+}
+.post-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(79,124,255,.12); border-color: #c9d8ff; }
+.post-card h2 { font-size: 20px; margin-bottom: 6px; }
+.post-card h2 a { color: var(--text); text-decoration: none; }
+.post-card h2 a:hover { color: var(--primary); }
+.post-meta { font-size: 13px; color: var(--text-light); margin-bottom: 10px; }
+.post-excerpt { font-size: 15px; color: var(--text-light); }
+
+/* 标签 */
+.tag {
+  display: inline-block; padding: 2px 10px; margin: 0 6px 6px 0;
+  font-size: 12px; border-radius: 999px;
+  background: var(--primary-light); color: var(--primary);
+  text-decoration: none; cursor: pointer;
+  border: none; transition: all .2s;
+}
+.tag:hover { background: var(--primary); color: #fff; }
+
+/* 文章详情 */
+.article-header { margin-bottom: 24px; }
+.article-header h1 { font-size: 30px; margin-bottom: 10px; }
+.back-link {
+  display: inline-block; margin-bottom: 16px;
+  color: var(--text-light); text-decoration: none; font-size: 14px;
+}
+.back-link:hover { color: var(--primary); }
+.article-body {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px 36px;
+}
+.markdown-body { font-size: 16px; }
+.markdown-body pre { border-radius: 8px; }
+
+/* 标签页 */
+.tag-cloud { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+.tag-cloud .tag { font-size: 14px; padding: 5px 16px; margin: 0 10px 12px 0; }
+.tag-count { opacity: .7; font-size: 12px; }
+
+/* 关于页 */
+.about-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 36px; }
+.avatar {
+  width: 88px; height: 88px; border-radius: 50%;
+  background: linear-gradient(135deg, #4f7cff, #9b6bff);
+  color: #fff; font-size: 36px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* 页脚 */
+.footer {
+  text-align: center; padding: 28px 0;
+  color: var(--text-light); font-size: 13px;
+  border-top: 1px solid var(--border);
+}
+
+.section-title { font-size: 22px; margin-bottom: 20px; }
+.empty { text-align: center; color: var(--text-light); padding: 60px 0; }
+
+@media (max-width: 600px) {
+  .article-body { padding: 20px; }
+  .hero h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#/" id="site-title">拾光小筑</a>
+    <div class="nav-links">
+      <a href="#/" data-route="/">首页</a>
+      <a href="#/tags" data-route="/tags">标签</a>
+      <a href="#/about" data-route="/about">关于</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container" id="app"></main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11/lib/core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11/lib/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11/lib/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11/lib/languages/bash.min.js"></script>
+<script src="posts.js"></script>
+<script>
+// ========== 初始化站点信息 ==========
+document.title = SITE.title + ' - 个人博客';
+document.getElementById('site-title').textContent = SITE.title;
+document.getElementById('footer').innerHTML =
+  `© ${SITE.since}-${new Date().getFullYear()} ${SITE.title} · ${SITE.subtitle} · Powered by Markdown`;
+
+marked.setOptions({
+  highlight: (code, lang) => {
+    if (lang && hljs.getLanguage(lang)) {
+      return hljs.highlight(code, { language: lang }).value;
+    }
+    return hljs.highlightAuto(code).value;
+  },
+  breaks: true,
+});
+
+const app = document.getElementById('app');
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function tagHtml(tags) {
+  return tags.map(t => `<a class="tag" href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join('');
+}
+
+// ========== 页面: 首页(文章列表) ==========
+function showHome() {
+  const sorted = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
+  app.innerHTML = `
+    <div class="hero">
+      <h1>${esc(SITE.title)}</h1>
+      <p>${esc(SITE.subtitle)}</p>
+    </div>
+    ${sorted.map(p => `
+      <article class="post-card" onclick="location.hash='#/post/${p.id}'">
+        <h2><a href="#/post/${p.id}">${esc(p.title)}</a></h2>
+        <div class="post-meta">📅 ${p.date}</div>
+        <p class="post-excerpt">${esc(p.excerpt)}</p>
+        <div style="margin-top:12px">${tagHtml(p.tags)}</div>
+      </article>
+    `).join('') || '<div class="empty">还没有文章，去 posts.js 添加第一篇吧。</div>'}
+  `;
+}
+
+// ========== 页面: 文章详情 ==========
+function showPost(id) {
+  const p = POSTS.find(x => x.id === id);
+  if (!p) { app.innerHTML = '<div class="empty">文章不存在。</div>'; return; }
+  document.title = p.title + ' - ' + SITE.title;
+  app.innerHTML = `
+    <a class="back-link" href="#/">← 返回文章列表</a>
+    <div class="article-header">
+      <h1>${esc(p.title)}</h1>
+      <div class="post-meta">📅 ${p.date} &nbsp;·&nbsp; ${tagHtml(p.tags)}</div>
+    </div>
+    <div class="article-body">
+      <div class="markdown-body">${marked.parse(p.content)}</div>
+    </div>
+  `;
+}
+
+// ========== 页面: 标签分类 ==========
+function showTags() {
+  const map = {};
+  POSTS.forEach(p => p.tags.forEach(t => (map[t] = map[t] || []).push(p)));
+  const tags = Object.keys(map).sort((a, b) => map[b].length - map[a].length);
+  app.innerHTML = `
+    <h1 class="section-title">🏷️ 标签分类</h1>
+    <div class="tag-cloud">
+      ${tags.map(t => `
+        <a class="tag" href="#/tag/${encodeURIComponent(t)}">
+          ${esc(t)} <span class="tag-count">×${map[t].length}</span>
+        </a>
+      `).join('') || '暂无标签'}
+    </div>
+  `;
+}
+
+// ========== 页面: 按标签筛选 ==========
+function showTag(tag) {
+  const list = POSTS.filter(p => p.tags.includes(tag))
+                    .sort((a, b) => b.date.localeCompare(a.date));
+  app.innerHTML = `
+    <a class="back-link" href="#/tags">← 全部标签</a>
+    <h1 class="section-title">🏷️ ${esc(tag)} <small style="color:var(--text-light);font-size:14px">(${list.length} 篇)</small></h1>
+    ${list.map(p => `
+      <article class="post-card" onclick="location.hash='#/post/${p.id}'">
+        <h2><a href="#/post/${p.id}">${esc(p.title)}</a></h2>
+        <div class="post-meta">📅 ${p.date}</div>
+        <p class="post-excerpt">${esc(p.excerpt)}</p>
+      </article>
+    `).join('')}
+  `;
+}
+
+// ========== 页面: 关于 ==========
+function showAbout() {
+  const total = POSTS.length;
+  const tagSet = new Set(POSTS.flatMap(p => p.tags));
+  app.innerHTML = `
+    <div class="about-card">
+      <div class="avatar">${esc(SITE.author[0])}</div>
+      <h1 style="margin-bottom:8px">${esc(SITE.author)}</h1>
+      <p style="color:var(--text-light);margin-bottom:24px">${esc(SITE.bio)}</p>
+      <h3 style="margin-bottom:10px">📊 博客数据</h3>
+      <p>共 <b>${total}</b> 篇文章 · <b>${tagSet.size}</b> 个标签 · 创建于 ${SITE.since} 年</p>
+      <h3 style="margin:24px 0 10px">✍️ 写作方式</h3>
+      <p>本博客文章全部使用 <b>Markdown</b> 编写，保存在 <code>posts.js</code> 中，页面自动渲染。</p>
+      <h3 style="margin:24px 0 10px">📮 联系方式</h3>
+      <p>欢迎在文章下留言交流（也可以在这里加上你的邮箱或社交账号）。</p>
+    </div>
+  `;
+}
+
+// ========== 路由 ==========
+function render() {
+  document.title = SITE.title + ' - 个人博客';
+  const hash = decodeURIComponent(location.hash.slice(1)) || '/';
+  const navRoute = hash.startsWith('/post') || hash.startsWith('/tag/') ? '/' :
+                   hash.startsWith('/tags') ? '/tags' :
+                   hash.startsWith('/about') ? '/about' : '/';
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.classList.toggle('active', a.dataset.route === navRoute));
+
+  window.scrollTo(0, 0);
+  if (hash === '/') showHome();
+  else if (hash.startsWith('/post/')) showPost(hash.slice(6));
+  else if (hash === '/tags') showTags();
+  else if (hash.startsWith('/tag/')) showTag(hash.slice(5));
+  else if (hash === '/about') showAbout();
+  else showHome();
+}
+
+window.addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>
